@@ -69,14 +69,13 @@ def guess(game_spot:dict):
 def print_result(possible: list):
     total = len(possible)
     print(f"Total available words: {total}")
-    if total <= 50:
-        count = 1
-        for word in possible:
-            word = word.replace("\n", "")
-            print(f"{count}. {word}", end=" ")
-            if count % 5 == 0:
-                print("\n")
-            count = count + 1
+    count = 1
+    for word in possible:
+        word = word.replace("\n", "")
+        print(f"{count}. {word}", end=" ")
+        if count % 5 == 0:
+            print("\n")
+        count = count + 1
         print("\n")
     return
 
