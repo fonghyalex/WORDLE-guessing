@@ -1,19 +1,19 @@
 # Author: Alex Fong
 # Project name: Wordle guessing
 
-import enchant
-import re
 from input import *
 from guessing import *
 
 
-def print_letters(game_spot, turn):
-    print(f"------ Turn {turn} WORDLE ------")
+def print_letters(game_spot: dict, turn: int):
+    print(f"\n------ Turn {turn} WORDLE ------")
     # Right words
-    rt_str = ""
-    for letter in game_spot["right"]:
-        rt_str = rt_str + letter + " "
-    print(rt_str)
+    rt_arr = ["_"] * 5
+    for letter, spot in game_spot["right"].items():
+        rt_arr[spot] = letter
+    for letter in rt_arr:
+        print(letter, end=" ")
+    print("\n")
 
     # Wrong words
     print("Words with uncertain spot:")
@@ -27,7 +27,7 @@ def print_letters(game_spot, turn):
     wa_str = ""
     count = 0
     for letter in game_spot["wasted"]:
-        wa_str = wa_str + letter + " "
+        wa_str = wa_str + letter + ", "
         count = count + 1
         if count > 10:
             print(f"{wa_str}\n")
@@ -39,10 +39,10 @@ def print_letters(game_spot, turn):
 if __name__ == '__main__':
     # Start from 2th round
     # Assume every 1st round starts with "AUDIO" -> A 5-letter word with most vowels
-    turn = 2
+    turn = 1
     # Keep track game letters and spots
     game_spot = {
-        "right": ["_"]*5,
+        "right": {},
         "wrong": {},
         "wasted": []
     }
@@ -67,10 +67,10 @@ if __name__ == '__main__':
         # Report current status
         print_letters(game_spot, turn)
 
+        # Guess
+        guess(game_spot)
+
         turn = turn + 1
 
-
-
-
-
+    print("Game failed... Good luck next time...")
 

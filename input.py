@@ -1,6 +1,7 @@
 import re
 
-def request_input(intro):
+
+def request_input(intro: str):
     # Return flag
     flag = False
     while not flag:
@@ -15,6 +16,8 @@ def request_input(intro):
             print("Error! Invalid length entered!")
             flag = False
             continue
+        elif len(input_str) == 0:
+            return {}
 
         # Deal with input
         str_arr = input_str.split(",", 4)
@@ -40,7 +43,6 @@ def request_input(intro):
         # Return dict
         if flag:
             return str_dict
-    pass
 
 
 def wasted_input():
@@ -72,27 +74,28 @@ def wasted_input():
             return wasted
 
 
-def merge_input(game, right, wrong, wasted):
+def merge_input(game: dict, right: dict, wrong: dict, wasted: list):
     # Right
     # (Record letters and spots)
-    for letter in right.keys():
-        for spot in right[letter]:
-            game["right"][spot] = letter
+    if right:
+        for letter, spot in right.items():
+            game["right"][letter] = spot[0]
 
     # Wrong
     # (Record letters and wrong spots)
-    for letter in wrong.keys():
-        if letter not in game["wrong"]:
-            game["wrong"][letter] = []
-        for spot in wrong[letter]:
-            if spot not in game["wrong"][letter]:
-                game["wrong"][letter].append(spot)
+    if wrong:
+        for letter in wrong.keys():
+            if letter not in game["wrong"]:
+                game["wrong"][letter] = []
+            for spot in wrong[letter]:
+                if spot not in game["wrong"][letter]:
+                    game["wrong"][letter].append(spot)
 
     # Wasted
     # (Record wasted letters)
-    for letter in wasted:
-        if letter not in game["wasted"]:
-            game["wasted"].append(letter)
+    if wasted:
+        for letter in wasted:
+            if letter not in game["wasted"]:
+                game["wasted"].append(letter)
 
     return game
-
