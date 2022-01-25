@@ -8,10 +8,13 @@ For each round, there will be 3 input lines.
 1st input: Letter in the correct spot
 2nd input: Letter in the wrong spot
 3rd input: Letter not in any spot
-
+\
 Format of input: \
 [Letter] + [Spot (1-5)] \
-W1,O2,R3,D4,L5
+W1,O2,R3,D4,L5 \
+\
+The program will display all possible word combination in the command prompt.
+\
 
 Feel free to update or report if there's room for improvement. \
 Have fun~
