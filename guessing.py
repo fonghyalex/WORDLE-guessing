@@ -72,9 +72,7 @@ def print_result(possible: list):
     count = 1
     for word in possible:
         word = word.replace("\n", "")
-        print(f"{count}. {word}", end=" ")
-        if count % 5 == 0:
-            print("\n")
+        print(f"{count}. {word}")
         count = count + 1
         print("\n")
     return
